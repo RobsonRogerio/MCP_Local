@@ -1,7 +1,7 @@
 [project]
 name = "mcp-local"
 version = "0.1.0"
-description = "Exemplo de servidor e cliente MCP locais usando FastMCP"
+description = "Exemplos de servidores e clientes MCP (local, remoto e Wikipedia) usando FastMCP"
 readme = "README.md"
 authors = [
     { name = "RobsonRogerio", email = "robson.rogerio@gmail.com" }
