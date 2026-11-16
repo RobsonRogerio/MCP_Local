@@ -3,22 +3,17 @@ from pathlib import Path
 
 from fastmcp import Client
 
-caminho_servidor = Path(__file__).parent / 'servidor.py'
-cliente = Client(caminho_servidor)
-
-async def testar_servidor(cliente, nome_usuario, id_usuario):
-    async with cliente:
-        argumentos = {'nome_usuario': nome_usuario, 'id_usuario': id_usuario}
-        resultado = await cliente.call_tool('dar_bom_dia', arguments=argumentos)
-        print(f'Resultado obtido do servidor MCP: {resultado.data}')
+CAMINHO_SERVIDOR = Path(__file__).parent / "servidor.py"
 
 
-if __name__ == '__main__':
-    asyncio.run(testar_servidor(
-        cliente=cliente,
-        nome_usuario='Robson',
-        id_usuario=4)
-    )
+async def testar_servidor(nome_usuario: str, id_usuario: int) -> None:
+    async with Client(CAMINHO_SERVIDOR) as cliente:
+        resultado = await cliente.call_tool(
+            "dar_bom_dia",
+            arguments={"nome_usuario": nome_usuario, "id_usuario": id_usuario},
+        )
+        print(f"Resultado obtido do servidor MCP: {resultado.data}")
 
 
-
+if __name__ == "__main__":
+    asyncio.run(testar_servidor(nome_usuario="Robson", id_usuario=4))
