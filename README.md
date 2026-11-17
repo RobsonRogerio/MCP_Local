@@ -10,12 +10,14 @@ Exemplos de servidores e clientes MCP usando [FastMCP](https://gofastmcp.com).
 | `src/mcp_remoto/` | HTTP (porta 8000) | O servidor roda separado e o cliente se conecta pela URL. Tool `dar_boa_noite`. |
 | `src/mcp_wiki/` | HTTP (porta 8001) | Tools de busca na Wikipedia. O cliente envia o resumo a um LLM (Groq) para gerar a resposta. |
 | `src/mcp_wiki/servidor_claude_wiki.py` | stdio | Mesmo servidor da Wikipedia, para uso no Claude Desktop. |
+| `src/mcp_openweather/` | HTTP (porta 8002) | Tools de tempo atual e previsão do tempo (API OpenWeather). O cliente envia os dados a um LLM (Groq) para gerar um resumo. |
 
 ## Requisitos
 
 - Python 3.13+
 - [uv](https://docs.astral.sh/uv/)
-- Para o exemplo `mcp_wiki`: uma chave de API do [Groq](https://console.groq.com)
+- Para os exemplos `mcp_wiki` e `mcp_openweather` (clientes): uma chave de API do [Groq](https://console.groq.com)
+- Para o exemplo `mcp_openweather` (servidor): uma chave de API do [OpenWeather](https://openweathermap.org/api). Chaves novas podem levar um tempo para ser ativadas, e até lá a API responde com erro 401.
 
 ## Configuração
 
@@ -23,11 +25,16 @@ Exemplos de servidores e clientes MCP usando [FastMCP](https://gofastmcp.com).
 uv sync
 ```
 
-Para o `mcp_wiki`, crie um arquivo `.env` na raiz a partir do modelo e preencha a chave:
+Para os exemplos `mcp_wiki` e `mcp_openweather`, crie um arquivo `.env` na raiz a partir do modelo e preencha as chaves:
 
 ```powershell
 Copy-Item .env.example .env
 ```
+
+| Variável | Usada por |
+|----------|-----------|
+| `GROQ_API_KEY` | clientes `mcp_wiki` e `mcp_openweather` |
+| `OPENWEATHER_API_KEY` | servidor `mcp_openweather` |
 
 O `.env` está no `.gitignore` e nunca deve ser enviado ao repositório.
 
@@ -49,7 +56,19 @@ uv run src/mcp_wiki/servidor.py
 uv run src/mcp_wiki/cliente.py
 ```
 
-Troque `mcp_wiki` por `mcp_remoto` para o outro exemplo. Os servidores usam portas diferentes, então podem rodar ao mesmo tempo.
+Troque `mcp_wiki` por `mcp_remoto` para o outro exemplo.
+
+**mcp_openweather** (dois terminais: servidor primeiro, cliente depois):
+
+```powershell
+# terminal 1
+uv run src/mcp_openweather/servidor_prev_tempo.py
+
+# terminal 2 (a cidade é opcional; o padrão é Atibaia)
+uv run src/mcp_openweather/cliente_prev_tempo.py "São Paulo"
+```
+
+Os servidores HTTP usam portas diferentes (8000, 8001 e 8002), então podem rodar ao mesmo tempo.
 
 ## Usar o servidor da Wikipedia no Claude Desktop
 
