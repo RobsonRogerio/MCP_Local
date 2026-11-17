@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "busca-wikipedia": {
+      "command": "C:/Users/robso/AppData/Local/Programs/Python/Python313/Scripts/uv.exe",
+      "args": [
+        "--directory",
+        "C:/Users/robso/OneDrive/Asimov Academy/MCPs/MCP_Local",
+        "run",
+        "src/mcp_wiki/servidor_claude_wiki.py"
+      ]
+    }
+  }
+}
