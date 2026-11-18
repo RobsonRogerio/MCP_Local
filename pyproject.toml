@@ -1,7 +1,7 @@
 [project]
-name = "mcp-local"
+name = "mcps"
 version = "0.1.0"
-description = "Exemplos de servidores e clientes MCP (local, remoto e Wikipedia) usando FastMCP"
+description = "Exemplos de servidores e clientes MCP (local, remoto, Wikipedia e OpenWeather) usando FastMCP"
 readme = "README.md"
 authors = [
     { name = "RobsonRogerio", email = "robson.rogerio@gmail.com" }
@@ -18,3 +18,8 @@ dependencies = [
 [build-system]
 requires = ["uv_build>=0.12.10,<0.13.0"]
 build-backend = "uv_build"
+
+# Por padrão o uv_build procura um módulo com o nome do projeto (src/mcps/).
+# Como o módulo do pacote continua sendo src/mcp_local/, indicamos o nome aqui.
+[tool.uv.build-backend]
+module-name = "mcp_local"

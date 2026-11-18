@@ -1,4 +1,4 @@
-# MCP Local
+# MCPs
 
 Exemplos de servidores e clientes MCP usando [FastMCP](https://gofastmcp.com).
 
