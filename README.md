@@ -80,7 +80,7 @@ O Claude Desktop inicia o servidor por conta própria e conversa com ele via std
 2. No Claude Desktop, abra **Configurações → Desenvolvedor → Editar configuração**. Isso abre o `claude_desktop_config.json` real.
 3. Copie o bloco `busca-wikipedia` para dentro de `mcpServers`. Se o arquivo já tiver outros servidores, adicione o bloco sem apagar os existentes.
 4. Feche o Claude Desktop por completo, inclusive o ícone da bandeja, e abra de novo.
-5. Peça algo como "busque na Wikipedia sobre Inteligência artificial". O Claude deve pedir permissão para usar as tools `buscar_wikipedia_local` e `resumir_artigo`.
+5. Peça algo como "busque na Wikipedia sobre Inteligência artificial". O Claude deve indicar que usou as tools `buscar_wikipedia_local` e `resumir_artigo` (dependendo da versão e da configuração, ele pode pedir permissão antes).
 
 **Problemas comuns:**
 
